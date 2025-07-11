@@ -1,0 +1,126 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Lastenheft Generator</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  
+   <div class="logo-container">
+  <img src="./img/Logo_SIVAS_Original.png" alt="Firmenlogo" class="logo">
+</div>
+  
+<div class="progress-bar"></div>
+<div class="container">
+  <h1>ERP Lastenheft Generator</h1>
+
+  <!-- Firmeninformationen -->
+  <label>Firmenname:
+    <input type="text" id="companyName">
+  </label>
+
+  <label for="industry">Branche:
+    <select type="text" id="industry" onchange="toggleOtherInput()">
+      <option value="">Bitte wählen...</option>
+      <option value="Maschinenbau">Maschinenbau</option>
+      <option value="Anlagenbau">Anlagenbau</option>
+      <option value="Variantenfertigung">Variantenfertigung</option>
+      <option value="Einzelfertigung">Einzelfertigung</option>
+      <option value="Sonstige">Sonstige</option>
+     </select>
+  </label>
+  
+  
+  <div id="other-industry-container" style="display: none; margin-top: 10px;">
+  <label for="other-industry">Bitte geben Sie Ihre Branche an:</label>
+  <input type="text" id="other-industry" placeholder="Andere Branche eingeben..." />
+</div>
+
+  <label>Anzahl Benutzer:
+    <input type="number" id="users">
+  </label>
+
+  <!-- ERP Module -->
+  <label><input type="checkbox" id="finance"> Buchhaltung</label>
+  <label><input type="checkbox" id="order"> Auftragsbearbeitung</label>
+  <label><input type="checkbox" id="purchase"> Einkauf</label>
+  <label><input type="checkbox" id="inventory"> Lagerverwaltung</label>
+  <label><input type="checkbox" id="production"> Produktion</label>
+  <label><input type="checkbox" id="crm"> CRM</label>
+  <label><input type="checkbox" id="ecom"> E-Commerce</label>
+
+  <!-- Technische Anforderungen -->
+  <label>Integration mit anderer Software:
+    <input type="text" id="integration">
+  </label>
+
+  <label>Hosting:
+    <select id="hosting">
+      <option value="">Bitte wählen...</option>
+      <option>On-Premises</option>
+      <option>Cloud</option>
+    </select>
+  </label>
+
+  <!-- Budget -->
+  <label>Projektbudget (€):
+    <input type="text" id="budget">
+  </label>
+
+  <label>Geplanter Start:
+    <input type="date" id="startDate">
+  </label>
+
+  <button onclick="generate()">Lastenheft generieren</button>
+
+  <h3>📄 Ihr Lastenheft</h3>
+  <textarea id="result" readonly></textarea><br>
+
+
+  <div class="form-container container">
+    <h2 style="text-align:center;">Kontaktinformationen</h2>
+    <h3>Bitte geben Sie Ihre Daten ein</h3>
+    <form action="#" method="post">
+      <label for="nachname">Nachname</label>
+      <input type="text" id="nachname" name="nachname" required>
+
+      <label for="vorname">Vorname</label>
+      <input type="text" id="vorname" name="vorname" required>
+
+      <label for="email">E-Mail</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="linkedin">LinkedIn-Profil (URL)</label>
+      <input type="url" id="linkedin" name="linkedin">
+
+    </form>
+  </div>
+
+  <button onclick="download()">Als Excel Datei speichern</button>
+  <button onclick="generatePDF()">Als PDF speichern</button>
+  <button onclick="sendEmail()">Per E-Mail senden</button>
+</div>
+  
+  
+  
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- XLSX (SheetJS) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+  window.onload = () => {
+    window.jsPDFInstance = window.jspdf.jsPDF;
+  }
+</script>
+
+<script type="module" src="./js.js"></script>
+  
+  
+
+</body>
